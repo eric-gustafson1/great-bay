@@ -1,0 +1,21 @@
+{
+  "name": "great-bay",
+  "version": "1.0.0",
+  "description": "Bootcamp exercise creating an eBay like application using node.js and MySQL",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/eric-gustafson1/great-bay.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/eric-gustafson1/great-bay/issues"
+  },
+  "homepage": "https://github.com/eric-gustafson1/great-bay#readme"
+}
