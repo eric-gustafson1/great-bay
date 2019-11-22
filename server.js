@@ -74,3 +74,58 @@ const postAuction = () => {
         );
     });
 }
+
+const bidAuction = () => {
+    connection.query("SELECT * FROM auctions", function (err, results) {
+        if (err) throw err;
+
+        inquirer.prompt([
+            {
+                name: 'choice',
+                type: 'rawlist',
+                choices: function () {
+                    let choiceArray = [];
+                    for (let i = 0; i < results.length; i++) {
+                        choiceArray.push(results[i].item_name);
+                    }
+                    return choiceArray;
+                },
+                message: 'What item would you like to bid on?'
+            },
+            {
+                name: 'bid',
+                type: 'input',
+                message: 'How much would you like to bid?'
+            }
+        ]).then((answer) => {
+            let chosenItem;
+            for (let i = 0; i < results.length; i++) {
+                if (results[i].item_name === answer.choice) {
+                    chosenItem = results[i];
+                }
+            }
+
+            if (chosenItem.highest_bid < parseInt(answer.bid)) {
+                connection.query(
+                    "UPDATE auctions SET ? WHERE ?",
+                    [
+                        {
+                            highest_bid: answer.bid
+                        },
+                        {
+                            id: chosenItem.id
+                        }
+                    ],
+                    function (error) {
+                        if (error) throw error;
+                        console.log("Bid placed successfully..");
+                        start()
+                    }
+                );
+            } else {
+                console.log('Your bid was too low.  Try again..')
+                start();
+            }
+        })
+    })
+}
