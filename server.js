@@ -13,11 +13,11 @@ const connection = mysql.createConnection({
 });
 
 // Make connection to mysql db
-connection.connect(function (err) {
+connection.connect((err) => {
     if (err) throw err;
     start();
 });
 
-function start() {
+const start = () => {
     console.log('in start')
 }
