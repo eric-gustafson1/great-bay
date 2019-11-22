@@ -1,5 +1,6 @@
 const mysql = require('mysql');
 const inquirer = require('inquirer');
+const chalk = require('chalk');
 
 // Create the connection information
 const connection = mysql.createConnection({
@@ -68,7 +69,7 @@ const postAuction = () => {
             },
             (err) => {
                 if (err) throw err;
-                console.log('Your auction was successfully created..');
+                console.log(chalk.green('Your auction was successfully created..'));
                 start();
             }
         );
@@ -118,12 +119,12 @@ const bidAuction = () => {
                     ],
                     function (error) {
                         if (error) throw error;
-                        console.log("Bid placed successfully..");
+                        console.log(chalk.green("Bid placed successfully.."));
                         start()
                     }
                 );
             } else {
-                console.log('Your bid was too low.  Try again..')
+                console.log(chalk.yellow('Your bid was too low.  Try again..'));
                 start();
             }
         })
