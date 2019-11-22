@@ -40,6 +40,7 @@ CREATE TABLE auctions
 
 ```bash
 node server.js
+```
 
 
 # What I Learned
