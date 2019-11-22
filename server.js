@@ -77,7 +77,7 @@ const postAuction = () => {
 }
 
 const bidAuction = () => {
-    connection.query("SELECT * FROM auctions", function (err, results) {
+    connection.query("SELECT * FROM auctions", (err, results) => {
         if (err) throw err;
 
         inquirer.prompt([
@@ -85,10 +85,8 @@ const bidAuction = () => {
                 name: 'choice',
                 type: 'rawlist',
                 choices: function () {
-                    let choiceArray = [];
-                    for (let i = 0; i < results.length; i++) {
-                        choiceArray.push(results[i].item_name);
-                    }
+
+                    let choiceArray = results.map(choice => choice.item_name)
                     return choiceArray;
                 },
                 message: 'What item would you like to bid on?'
@@ -117,7 +115,7 @@ const bidAuction = () => {
                             id: chosenItem.id
                         }
                     ],
-                    function (error) {
+                    (error) => {
                         if (error) throw error;
                         console.log(chalk.green("Bid placed successfully.."));
                         start()
