@@ -17,6 +17,7 @@ connection.connect((err) => {
     start();
 });
 
+// Application flow
 const start = () => {
     inquirer.prompt({
         name: 'postOrBid',
@@ -35,6 +36,7 @@ const start = () => {
 
 }
 
+// Function for posting a new item to bid on
 const postAuction = () => {
     inquirer.prompt([{
         name: 'item',
@@ -76,6 +78,7 @@ const postAuction = () => {
     });
 }
 
+// Function for the Bidding
 const bidAuction = () => {
     connection.query("SELECT * FROM auctions", (err, results) => {
         if (err) throw err;
@@ -85,7 +88,6 @@ const bidAuction = () => {
                 name: 'choice',
                 type: 'rawlist',
                 choices: function () {
-
                     let choiceArray = results.map(choice => choice.item_name)
                     return choiceArray;
                 },
